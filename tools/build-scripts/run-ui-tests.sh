@@ -13,7 +13,7 @@
 #echo "no"
 
 #Start the emulator
-$ANDROID_HOME/tools/emulator -avd androidAVD -s "768x1280" &
+$ANDROID_HOME/tools/emulator -avd androidAVD &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
