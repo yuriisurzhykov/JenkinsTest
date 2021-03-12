@@ -6,7 +6,8 @@
 #
 echo "============================== Script run-ui-tests.sh =============================="
 #Start the emulator
-$ANDROID_HOME\\tools\\emulator -avd testAVD -wipe-data & EMULATOR_PID=$!
+$ANDROID_HOME\\tools\\emulator -avd testAVD -wipe-data &
+EMULATOR_PID=$!
 
 # Wait for Android to finish booting
 WAIT_CMD="${ANDROID_HOME}\platform-tools\adb wait-for-device shell getprop init.svc.bootanim"
