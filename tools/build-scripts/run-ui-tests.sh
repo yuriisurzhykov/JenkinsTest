@@ -25,6 +25,7 @@ $ANDROID_HOME\\platform-tools\\adb logcat > build/logcat.log &
 LOGCAT_PID=$!
 
 # Run the tests
+./gradlew installDebug
 ./gradlew connectedAndroidTest -i
 
 # Stop the background processes
