@@ -7,11 +7,14 @@
 echo "============================== Script run-ui-tests.sh =============================="
 
 #Download sdk image
-$ANDROID_HOME\\tools\\bin\\sdkmanager --update "system-images;android-28;google_apis;x86"
+$ANDROID_HOME\\tools\\bin\\sdkmanager --install "system-images;android-25;google_apis;x86"
+
+#Creating emulator
+$ANDROID_HOME\\tools\\bin\\avdmanager create avd -n androidAVD -k "system-images;android-25;google_apis;x86" --skin WVGA800 --force
+echo "no"
 
 #Start the emulator
-$ANDROID_HOME\\tools\\bin\\avdmanager create avd -n androidAVD -k "system-images;android-28;google_apis;x86" --skin WVGA800 --force
-$ANDROID_HOME\\tools\\emulator -avd testAVD WVGA800 -scale 96dpi -dpi-device 160 -wipe-data -gpu swiftshader_indirect &
+$ANDROID_HOME\\tools\\emulator -avd androidAVD &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
