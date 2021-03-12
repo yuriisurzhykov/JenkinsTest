@@ -5,8 +5,8 @@
 # (c) 2021 Global Consulting Partners #
 #-------------------------------------#
 
-#Download sdk image
-$ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-25;google_apis;x86"
+##Download sdk image
+#$ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-25;google_apis;x86"
 
 #Creating emulator
 $ANDROID_HOME/tools/bin/avdmanager create avd -n androidAVD -k --force "system-images;android-25;google_apis;x86"
