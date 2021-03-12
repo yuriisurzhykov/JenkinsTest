@@ -10,11 +10,11 @@ echo "============================== Script run-ui-tests.sh ====================
 $ANDROID_HOME\\tools\\bin\\sdkmanager --install "system-images;android-25;google_apis;x86"
 
 #Creating emulator
-$ANDROID_HOME\\tools\\bin\\avdmanager create avd -n androidAVD -k "system-images;android-25;google_apis;x86" --skin WVGA800 --force
+$ANDROID_HOME\\tools\\bin\\avdmanager create avd -n androidAVD -k "system-images;android-25;google_apis;x86" --force
 echo "no"
 
 #Start the emulator
-$ANDROID_HOME\\tools\\emulator -avd androidAVD &
+$ANDROID_HOME\\tools\\emulator -avd androidAVD -s "768x1280" &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
@@ -37,7 +37,6 @@ LOGCAT_PID=$!
 ./gradlew connectedAndroidTest -i
 
 # Stop the background processes
-kill $LOGCAT_PID
-kill $EMULATOR_PID
-$ANDROID_HOME\\platform-tools\\adb -e emu kill
+$ANDROID_HOME\\platform-tools\\adb -e emu kill $LOGCAT_PID
+$ANDROID_HOME\\platform-tools\\adb -e emu kill $EMULATOR_PID
 $ANDROID_HOME\\tools\\bin\\avdmanager delete avd -n androidAVD
