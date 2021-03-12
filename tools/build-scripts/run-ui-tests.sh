@@ -5,8 +5,13 @@
 # (c) 2021 Global Consulting Partners
 #
 echo "============================== Script run-ui-tests.sh =============================="
+
+#Download sdk image
+$ANDROID_HOME\\tools\\bin\\sdkmanager --update "system-images;android-28;google_apis;x86"
+
 #Start the emulator
-$ANDROID_HOME\\tools\\emulator -avd testAVD -wipe-data &
+$ANDROID_HOME\\tools\\bin\\avdmanager create avd -n androidAVD -k "system-images;android-28;google_apis;x86" --skin WVGA800 --force
+$ANDROID_HOME\\tools\\emulator -avd testAVD WVGA800 -scale 96dpi -dpi-device 160 -wipe-data -gpu swiftshader_indirect &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
@@ -32,3 +37,4 @@ LOGCAT_PID=$!
 kill $LOGCAT_PID
 kill $EMULATOR_PID
 $ANDROID_HOME\\platform-tools\\adb -e emu kill
+$ANDROID_HOME\\tools\\bin\\avdmanager delete avd -n androidAVD
