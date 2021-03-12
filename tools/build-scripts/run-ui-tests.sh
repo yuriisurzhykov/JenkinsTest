@@ -1,20 +1,19 @@
 #!/bin/bash
-#
-# Build scripts for Jenkins
-#
-# (c) 2021 Global Consulting Partners
-#
-echo "============================== Script run-ui-tests.sh =============================="
+#-------------------------------------#
+# Build scripts for Jenkins           #
+#                                     #
+# (c) 2021 Global Consulting Partners #
+#-------------------------------------#
 
 #Download sdk image
-$ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-25;google_apis;x86"
+$ANDROID_HOME/tools/bin/sdkmanager --install \"system-images;android-25;google_apis;x86\"
 
 #Creating emulator
-$ANDROID_HOME/tools/bin/avdmanager create avd -n androidAVD -k "system-images;android-25;google_apis;x86" --force
+$ANDROID_HOME/tools/bin/avdmanager create avd -n androidAVD -k \"system-images;android-25;google_apis;x86\" --force
 echo "no"
 
 #Start the emulator
-$ANDROID_HOME/tools/emulator -avd androidAVD -s "768x1280" &
+$ANDROID_HOME/tools/emulator -avd androidAVD -s \"768x1280\" &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
