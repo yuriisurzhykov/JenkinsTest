@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #Start the emulator
+$ANDROID_SDK/tools/emulator -list-avd
 $ANDROID_SDK/tools/emulator -avd Nexus_5X_API_23 -wipe-data &
 EMULATOR_PID=$!
 
