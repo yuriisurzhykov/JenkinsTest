@@ -36,6 +36,8 @@ LOGCAT_PID=$!
 ./gradlew connectedAndroidTest -i
 
 # Stop the background processes
+echo "LOGCAT_PID = ${LOGCAT_PID}"
+echo "EMULATOR_PID = ${EMULATOR_PID}"
 $ANDROID_HOME/platform-tools/adb -e emu kill $LOGCAT_PID
 $ANDROID_HOME/platform-tools/adb -e emu kill $EMULATOR_PID
 $ANDROID_HOME/tools/bin/avdmanager delete avd -n androidAVD
