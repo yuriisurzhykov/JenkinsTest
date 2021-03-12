@@ -6,7 +6,7 @@
 #
 echo "============================== Script run-ui-tests.sh =============================="
 #Start the emulator
-$ANDROID_SDK/tools/emulator -avd Android28 -wipe-data &
+$ANDROID_SDK/tools/emulator -avd testAVD -wipe-data &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
