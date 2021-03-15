@@ -13,7 +13,7 @@
 #echo "no"
 
 #Start the emulator
-$ANDROID_HOME/tools/emulator -no-snapshot -port 5556 -avd androidAVD &
+$ANDROID_HOME/tools/emulator -no-window -port 5556 -avd androidAVD &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
