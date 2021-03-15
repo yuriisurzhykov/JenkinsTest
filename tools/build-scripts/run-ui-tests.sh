@@ -18,7 +18,7 @@ $ANDROID_HOME/platform-tools/adb start-server
 $ANDROID_HOME/emulator/emulator -ports 5792,5793 -report-console tcp:5870,max=60 -avd androidAVD -no-window
 EMULATOR_PID=$!
 
- Wait for Android to finish booting
+#Wait for Android to finish booting
 WAIT_CMD="${ANDROID_HOME}/platform-tools/adb -s emulator-5792 wait-for-device shell getprop init.svc.bootanim"
 until $WAIT_CMD | grep -m 1 stopped; do
   echo "Waiting..."
