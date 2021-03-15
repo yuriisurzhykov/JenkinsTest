@@ -9,11 +9,11 @@
 #$ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-25;google_apis;x86"
 
 ##Creating emulator
-#$ANDROID_HOME/tools/bin/avdmanager create avd -n androidAVD -k --force "system-images;android-25;google_apis;x86"
+#$ANDROID_HOME/tools/bin/avdmanager create avd -n androidAVD -k "system-images;android-25;google_apis;x86 --force"
 #echo "no"
 
 #Start the emulator
-$ANDROID_HOME/tools/emulator -avd androidAVD &
+$ANDROID_HOME/tools/emulator -port 5556 -avd androidAVD &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
@@ -38,6 +38,6 @@ LOGCAT_PID=$!
 # Stop the background processes
 echo "LOGCAT_PID = ${LOGCAT_PID}"
 echo "EMULATOR_PID = ${EMULATOR_PID}"
-$ANDROID_HOME/platform-tools/adb -e emu kill $LOGCAT_PID
-$ANDROID_HOME/platform-tools/adb -e emu kill $EMULATOR_PID
-$ANDROID_HOME/tools/bin/avdmanager delete avd -n androidAVD
+kill $LOGCAT_PID
+kill $EMULATOR_PID
+$ANDROID_HOME/platform-tools/adb -s emulator-5556 emu kill
