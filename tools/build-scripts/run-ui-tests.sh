@@ -17,11 +17,11 @@ $ANDROID_HOME/tools/emulator -no-window -port 5556 -avd androidAVD &
 EMULATOR_PID=$!
 
 # Wait for Android to finish booting
-WAIT_CMD="${ANDROID_HOME}/platform-tools/adb wait-for-device shell getprop init.svc.bootanim"
-until $WAIT_CMD | grep -m 1 stopped; do
-  echo "Waiting..."
-  sleep 1
-done
+#WAIT_CMD="${ANDROID_HOME}/platform-tools/adb wait-for-device shell getprop init.svc.bootanim"
+#until $WAIT_CMD | grep -m 1 stopped; do
+#  echo "Waiting..."
+#  sleep 1
+#done
 
 # Unlock the Lock Screen
 $ANDROID_HOME/platform-tools/adb shell input keyevent 82
