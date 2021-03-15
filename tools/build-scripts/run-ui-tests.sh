@@ -14,12 +14,12 @@
 #echo "no"
 
 #Start the emulator
-$ANDROID_HOME/platform-tools/adb.exe start-server
-$ANDROID_HOME/tools/emulator.exe -ports 5554,5555 -report-console tcp:5870,max=60 -avd androidAVD -no-window
+$ANDROID_HOME/platform-tools/adb start-server
+$ANDROID_HOME/emulator/emulator -ports 5792,5793 -report-console tcp:5870,max=60 -avd androidAVD -no-window
 EMULATOR_PID=$!
 
 #Wait for Android to finish booting
-WAIT_CMD="${ANDROID_HOME}/platform-tools/adb.exe -s emulator-5554 wait-for-device shell getprop init.svc.bootanim"
+WAIT_CMD="${ANDROID_HOME}/platform-tools/adb -s emulator-5792 wait-for-device shell getprop init.svc.bootanim"
 until $WAIT_CMD | grep -m 1 stopped; do
   echo "Waiting..."
   sleep 1
@@ -29,8 +29,8 @@ done
 $ANDROID_HOME/platform-tools/adb shell input keyevent 82
 
 # Clear and capture logcat
-$ANDROID_HOME/platform-tools/adb.exe logcat -c
-$ANDROID_HOME/platform-tools/adb.exe logcat > build/logcat.log &
+$ANDROID_HOME/platform-tools/adb logcat -c
+$ANDROID_HOME/platform-tools/adb logcat > build/logcat.log &
 LOGCAT_PID=$!
 
 # Run the tests
@@ -42,5 +42,5 @@ echo "LOGCAT_PID = ${LOGCAT_PID}"
 echo "EMULATOR_PID = ${EMULATOR_PID}"
 kill $LOGCAT_PID
 kill $EMULATOR_PID
-$ANDROID_HOME/platform-tools/adb.exe -s emulator-5554 emu kill
-$ANDROID_HOME/platform-tools/adb.exe kill-server
+$ANDROID_HOME/platform-tools/adb -s emulator-5792 emu kill
+$ANDROID_HOME/platform-tools/adb kill-server
