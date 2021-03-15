@@ -5,6 +5,7 @@
 # (c) 2021 Global Consulting Partners #
 #-------------------------------------#
 
+
 ##Download sdk image
 #$ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-25;google_apis;x86"
 
@@ -13,15 +14,16 @@
 #echo "no"
 
 #Start the emulator
-$ANDROID_HOME/tools/emulator -no-window -port 5556 -gpu no -avd androidAVD &
+$ANDROID_HOME/platform-tools/adb start-server
+$ANDROID_HOME/emulator/emulator -ports 5792,5793 -report-console tcp:5870,max=60 -avd androidAVD -no-window
 EMULATOR_PID=$!
 
-# Wait for Android to finish booting
-#WAIT_CMD="${ANDROID_HOME}/platform-tools/adb wait-for-device shell getprop init.svc.bootanim"
-#until $WAIT_CMD | grep -m 1 stopped; do
-#  echo "Waiting..."
-#  sleep 1
-#done
+ Wait for Android to finish booting
+WAIT_CMD="${ANDROID_HOME}/platform-tools/adb -s emulator-5792 wait-for-device shell getprop init.svc.bootanim"
+until $WAIT_CMD | grep -m 1 stopped; do
+  echo "Waiting..."
+  sleep 1
+done
 
 # Unlock the Lock Screen
 $ANDROID_HOME/platform-tools/adb shell input keyevent 82
@@ -40,4 +42,5 @@ echo "LOGCAT_PID = ${LOGCAT_PID}"
 echo "EMULATOR_PID = ${EMULATOR_PID}"
 kill $LOGCAT_PID
 kill $EMULATOR_PID
-$ANDROID_HOME/platform-tools/adb -s emulator-5556 emu kill
+$ANDROID_HOME/platform-tools/adb -s emulator-5792 emu kill
+$ANDROID_HOME/platform-tools/adb kill-server
